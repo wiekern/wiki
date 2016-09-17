@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <link rel="Stylesheet" type="text/css" href="/static/css/style.css">
+    <link rel="Stylesheet" type="text/css" href="/static/css/tango.css">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="alternate" type="application/atom+xml" href="atom.xml" title="Atom feed">
+    <title>Install wordpress on OSX/MAC - wiekern's WIKI</title>
+    <meta name="keywords" content=""/>
+    <meta name="description" content=""/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  </head>
+
+  <body>
+    <div id="container">
+      
+<div id="header">
+  <div class="post-nav"><a href="/">Home</a>&nbsp;&#187;&nbsp;<a href="/#Web">Web</a>&nbsp;&#187;&nbsp;Install wordpress on OSX/MAC
+    <span class="updated">Updated&nbsp;
+      2016-09-17 13:07
+    </span></div>
+</div>
+<div class="clearfix"></div>
+
+<div class="page_title">Install wordpress on OSX/MAC</div>
+
+  <h1 id="tools">Tools</h1>
+<ol>
+<li>Apache HTTP Server</li>
+<li>MySQL Community Server </li>
+<li>wordpress</li>
+<li>PHP Interpreter</li>
+</ol>
+<h1 id="installation">Installation</h1>
+<h2 id="apache-http-server">Apache HTTP Server</h2>
+<ol>
+<li>Go to <a href="https://httpd.apache.org/">https://httpd.apache.org/</a>, then download the lastest version. It'a bz2 or gz package.</li>
+<li>Extract the package, entering into main directory.</li>
+<li>sudo ./configure</li>
+<li>sudo make &amp;&amp; make install</li>
+<li>sudo apachectl start/stop, or sudo apachectl -k restart</li>
+</ol>
+<h2 id="mysql-community-server">MySQL Community Server</h2>
+<ol>
+<li>Go to <a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a> , download the format DMG Archive.</li>
+<li>Open this DMG file to install it. Before the installation is completely finish,  <strong>a password dialog</strong> will prompt, and the random password is given. Please store it!</li>
+<li>Via Spotlight opening MySQL.prefPane, and start MySQL Server.</li>
+<li>Using <code>mysql -uroot -p</code> with the given random password to login under command window(zsh). Then update the password with ALTER USER, <code>ALTER USER 'root'@'localhost' IDENTIFIED BY 'MyNewPass';</code></li>
+<li>To create database for wordpress <ul>
+<li><code>create database wordpress;</code> (wordpress is database name)</li>
+<li><code>grant all privileges on wordpress.* to "username"@"localhost" identified by "password";</code> username and password for wordpress admin.</li>
+<li><code>flush privileges;</code></li>
+<li><code>exit</code></li>
+</ul>
+</li>
+</ol>
+<h2 id="wordpress">wordpress</h2>
+<ol>
+<li>Download source code of wordpress.</li>
+<li>Extract it and put it in "/var/www/" .</li>
+<li>Enter root directory of wordpress, create wp-config.php by copying wp-config-sample.php.</li>
+<li>Configure Database relevant options.<ul>
+<li>define('DB_NAME', 'wordpress');</li>
+<li>define('DB_USER', 'root');</li>
+<li>define('DB_PASSWORD', 'mysql');</li>
+<li>define('DB_HOST', 'localhost:/tmp/mysql.sock'); </li>
+</ul>
+</li>
+</ol>
+<h3 id="errors">Errors</h3>
+<ol>
+<li>mysqli_real_connect(): (HY000/2002): No such file or directory in /private/var/www/wordpress/wp-includes/wp-db.php on line 1529<ul>
+<li>change define('DB_HOST', 'localhost'); to define('DB_HOST', 'localhost:/tmp/mysql.sock'); </li>
+</ul>
+</li>
+</ol>
+<h2 id="php-interpreter">PHP Interpreter</h2>
+<ol>
+<li>To install PHP using command <code>curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0</code></li>
+<li>Enter directory "/var/www/" which is the root path of your website, <code>sudo php -S localhost:80</code></li>
+<li>Open <a href="http://localhost:80/wordpress/">http://localhost:80/wordpress/</a></li>
+</ol>
+    </div>
+    <div id="footer">
+      <span>
+        <p>Copyright © 2016 wiekern.
+        Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
+        <p>Site Generated 2016-09-17 13:08:51</p>
+      </span>
+    </div>
+  </body>
+</html>
