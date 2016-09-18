@@ -1,11 +1,12 @@
 # Document:
 # http://simiki.org/docs/configuration.html
 
-url: http://wiekern.github.io 
-title: wiekernWiki
-keywords: 
+url: http://wiekern.github.io/wiki
+title: wiekern's Wiki
+keywords: Linux, Java, C/C++, Android, Web 
 description: 
 author: wieKern
+root: /wiki/
 
 default_ext: md
 pygments: true
