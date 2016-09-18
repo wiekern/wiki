@@ -18,6 +18,17 @@ date: 2016-09-18 11:08
 4. sudo make && make install
 5. sudo apachectl start/stop, or sudo apachectl -k restart
 
+### httpd.conf
+- sudo apachectl -V|grep SERVER_CONFIG_FILE to find which `httpd.conf` is loaded by default.
+- DocumentRoot in `httpd.conf` defines the root directory of your website. You can change it to which you want. For example,
+	
+	> \#DocumentRoot "/Library/WebServer/Documents"  (default)
+	> DocumentRoot "/var/www" (self-defined)
+	> \#\<Directory "/Library/WebServer/Documents"\> (default)
+	> \<Directory "/var/www"\> (self-defined)
+
+
+
 ## MySQL Community Server
 1. Go to <https://dev.mysql.com/downloads/mysql/> , download the format DMG Archive.
 2. Open this DMG file to install it. Before the installation is completely finish,  **a password dialog** will prompt, and the random password is given. Please store it!
@@ -45,7 +56,17 @@ date: 2016-09-18 11:08
 
 ## PHP Interpreter
 1. To install PHP using command `curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0`
-2. Enter directory "/var/www/" which is the root path of your website, `sudo php -S localhost:80`
-3. Open <http://localhost:80/wordpress/>
+2. To find the path of `libphp7.so` for apache httpd. 
+3. To insert a line `LoadModule php7_module local/php5/libphp7.so` in LoadModule block in `httpd.conf`.
+	- on my OSX `local/php5/libphp7.so` is `/usr/local/php5/libphp7.so`, apache httpd loads modules in default directory `/usr/`
+
+### Tipps
+You can use the built in webserver with PHP 5.4+ so you don't need to install another webserver like apache httpd. Just using follow command to run it.
+
+- Enter directory "/var/www/" which is the root path of your website, `sudo php -S localhost:80`
+
+--- 
+Finnally, Open <http://localhost:80/wordpress/>
+
 
 
