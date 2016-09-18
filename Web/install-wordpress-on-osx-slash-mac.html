@@ -41,6 +41,19 @@
 <li>sudo make &amp;&amp; make install</li>
 <li>sudo apachectl start/stop, or sudo apachectl -k restart</li>
 </ol>
+<h3 id="httpdconf">httpd.conf</h3>
+<ul>
+<li>sudo apachectl -V|grep SERVER_CONFIG_FILE to find which <code>httpd.conf</code> is loaded by default.</li>
+<li>
+<p>DocumentRoot in <code>httpd.conf</code> defines the root directory of your website. You can change it to which you want. For example,</p>
+<blockquote>
+<p>#DocumentRoot "/Library/WebServer/Documents"  (default)
+DocumentRoot "/var/www" (self-defined)
+#\&lt;Directory "/Library/WebServer/Documents"> (default)
+\&lt;Directory "/var/www"> (self-defined)</p>
+</blockquote>
+</li>
+</ul>
 <h2 id="mysql-community-server">MySQL Community Server</h2>
 <ol>
 <li>Go to <a href="https://dev.mysql.com/downloads/mysql/">https://dev.mysql.com/downloads/mysql/</a> , download the format DMG Archive.</li>
@@ -78,15 +91,25 @@
 <h2 id="php-interpreter">PHP Interpreter</h2>
 <ol>
 <li>To install PHP using command <code>curl -s http://php-osx.liip.ch/install.sh | bash -s 7.0</code></li>
-<li>Enter directory "/var/www/" which is the root path of your website, <code>sudo php -S localhost:80</code></li>
-<li>Open <a href="http://localhost:80/wordpress/">http://localhost:80/wordpress/</a></li>
+<li>To find the path of <code>libphp7.so</code> for apache httpd. </li>
+<li>To insert a line <code>LoadModule php7_module local/php5/libphp7.so</code> in LoadModule block in <code>httpd.conf</code>.<ul>
+<li>on my OSX <code>local/php5/libphp7.so</code> is <code>/usr/local/php5/libphp7.so</code>, apache httpd loads modules in default directory <code>/usr/</code></li>
+</ul>
+</li>
 </ol>
+<h3 id="tipps">Tipps</h3>
+<p>You can use the built in webserver with PHP 5.4+ so you don't need to install another webserver like apache httpd. Just using follow command to run it.</p>
+<ul>
+<li>Enter directory "/var/www/" which is the root path of your website, <code>sudo php -S localhost:80</code></li>
+</ul>
+<hr />
+<p>Finnally, Open <a href="http://localhost:80/wordpress/">http://localhost:80/wordpress/</a></p>
     </div>
     <div id="footer">
       <span>
         <p>Copyright © 2016 wieKern.
         Powered by <a href="http://simiki.org/" target="_blank">Simiki</a>.</p>
-        <p>Site Generated 2016-09-18 11:09:24</p>
+        <p>Site Generated 2016-09-18 13:41:26</p>
       </span>
     </div>
   </body>
